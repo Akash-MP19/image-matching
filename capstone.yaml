@@ -1,0 +1,47 @@
+# Service Manifest
+name: ai-image-understanding-content-matching-engine
+version: "1.0.0"
+
+# Execution commands
+run: uvicorn src.main:app --host 0.0.0.0 --port 8000
+seed: python scripts/seed_data.py
+test: python -m pytest -v
+
+# Network configuration
+base_url: http://localhost:8000
+
+# Probe Endpoints
+endpoints:
+  health:
+    method: GET
+    path: /health
+  batch_ingest:
+    method: POST
+    path: /api/v1/batch/ingest
+  batch_status:
+    method: GET
+    path: /api/v1/batch/status
+  list_images:
+    method: GET
+    path: /api/v1/images
+  create_post:
+    method: POST
+    path: /api/v1/posts
+  match_images:
+    method: GET
+    path: /api/v1/posts/{id}/images
+  force_candidate:
+    method: POST
+    path: /api/v1/posts/{id}/force-candidate
+  review_suggestion:
+    method: POST
+    path: /api/v1/review/suggestions/{id}
+  cost_summary:
+    method: GET
+    path: /api/v1/costs
+  cost_ledger:
+    method: GET
+    path: /api/v1/costs/ledger
+  evaluation_run:
+    method: POST
+    path: /api/v1/eval/run

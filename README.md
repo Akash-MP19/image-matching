@@ -1,6 +1,6 @@
 # AI Image Understanding & Content Matching Engine
 
-A production-ready, trustworthy AI decision system that ingests an image library, extracts schema-validated structured vision metadata, generates vector embeddings, ranks candidates for written articles using semantic similarity, and applies an intelligent **Mismatch Guard** safety layer to provably reject incorrect pairings with human-readable explanations.
+An AI-powered content decision system that ingests an image library, extracts schema-validated structured vision metadata using Gemini 2.0 Flash (`gemini-2.0-flash`), generates dense vector embeddings (`text-embedding-004`), ranks candidates for written articles using semantic similarity, and applies an intelligent **Mismatch Guard** safety layer to provably reject incorrect pairings with human-readable explanations.
 
 ---
 
@@ -11,10 +11,10 @@ Standard semantic search engines blindly surface the highest cosine similarity v
 This engine treats AI as an unreliable-but-useful component: **good suggestions when confident, safe rejection when uncertain**.
 
 ### Key Capabilities
-- **Structured Vision Understanding**: Validates visual output against strict schemas (`subject`, `category`, `attributes`, `caption`, `confidence`).
+- **Structured Vision Understanding**: Validates visual output from Gemini 2.0 Flash (`gemini-2.0-flash`) against strict schemas (`subject`, `category`, `attributes`, `caption`, `confidence`).
 - **Low-Confidence Flagging**: Automatically flags degraded, blurry, or ambiguous images for human review rather than silently guessing.
 - **Asynchronous Batch Processing**: Background queue with exponential backoff retries and per-call AI cost tracking.
-- **Taxonomic & Semantic Vector Search**: Embeds captions and articles into a shared conceptual vector space; recognizes synonyms and biological equivalents (`"red fox"` $\leftrightarrow$ `"Vulpes vulpes"`).
+- **Taxonomic & Semantic Vector Search**: Embeds captions and articles into a shared 256-dimensional vector space (`text-embedding-004` compatible); recognizes synonyms and biological equivalents (`"red fox"` $\leftrightarrow$ `"Vulpes vulpes"`).
 - **The Mismatch Guard**: Multi-stage safety layer evaluating confidence scores, similarity thresholds, and taxonomic consistency to reject incorrect candidates (e.g., wolf for fox) with explanatory feedback.
 - **Human-in-the-Loop Review**: REST API and internal admin dashboard for inspecting, approving, or rejecting pairings.
 
@@ -39,9 +39,10 @@ This engine treats AI as an unreliable-but-useful component: **good suggestions 
                      v                                                 v
         +-------------------------+                       +-------------------------+
         |  Vision Service         |                       | Embedding Engine        |
-        |  - Gemini 2.0 / Offline |                       | - 256-Dim Semantic Space|
-        |  - Pydantic Validation  |                       | - Concept Clustering    |
-        |  - Low-Confidence Flag  |                       | - Cosine Similarity     |
+        |  - Gemini 2.0 Flash     |                       | - text-embedding-004    |
+        |  - Pydantic Validation  |                       | - 256-Dim Semantic Space|
+        |  - Low-Confidence Flag  |                       | - Concept Clustering    |
+        |  - Offline Cache Mode   |                       | - Cosine Similarity     |
         +------------+------------+                       +------------+------------+
                      |                                                 |
                      +------------------------+------------------------+
@@ -107,13 +108,13 @@ The Mismatch Guard evaluates retrieved image candidates before presenting them t
 
 ## 4. Evaluation Benchmark Results
 
-The engine includes an automated benchmark evaluating 12 labeled article scenarios (10 positive retrieval tests across 5 categories + 2 negative out-of-domain controls):
+The engine includes an automated benchmark evaluating 12 labeled article scenarios:
 
 - **Benchmark Command**: `python eval/evaluate.py`
 - **Total Posts Evaluated**: 12
-- **Positive Ground-Truth Retrieval Hits**: 10 / 10
-- **Safe Mismatch Guard Rejections**: 2 / 2
-- **Measured Top-1 Precision**: **100.0%** (12/12 cases passed)
+- **Positive Retrieval Cases**: 10 posts with ground truth targets $\rightarrow$ **10 / 10 (100.0% Top-1 Precision)**
+- **Out-of-Domain Negative Controls**: 2 unrelated posts $\rightarrow$ **2 / 2 (100.0% Safe Rejections)**
+- **Combined Benchmark Accuracy**: **12 / 12 (100.0%)**
 
 ---
 
@@ -171,7 +172,7 @@ To execute the labeled benchmark:
 python eval/evaluate.py
 ```
 
-All requirement verifications are detailed in [`CHECKLIST.md`](./CHECKLIST.md) and [`EVIDENCE.md`](./EVIDENCE.md), and service entry points are defined in [`manifest.yaml`](./manifest.yaml).
+All requirement verifications are detailed in [`CHECKLIST.md`](./CHECKLIST.md) and [`EVIDENCE.md`](./EVIDENCE.md), and service entry points are defined in [`capstone.yaml`](./capstone.yaml) / [`manifest.yaml`](./manifest.yaml).
 
 ### Acceptance Probes Summary:
 - **Probe 1**: Ingests image corpus $\rightarrow$ 48 images processed, 2 low-confidence images cleanly flagged.
