@@ -1,0 +1,668 @@
+{
+  "fox_01.jpg": {
+    "subject": "red fox",
+    "category": "animal",
+    "attributes": [
+      "orange fur",
+      "bushy tail",
+      "wildlife",
+      "forest",
+      "canid",
+      "carnivore"
+    ],
+    "caption": "A vibrant red fox standing in an autumn forest clearing.",
+    "confidence": 0.9
+  },
+  "fox_02.jpg": {
+    "subject": "red fox",
+    "category": "animal",
+    "attributes": [
+      "orange fur",
+      "bushy tail",
+      "wildlife",
+      "forest",
+      "canid",
+      "carnivore"
+    ],
+    "caption": "Close-up of a wild red fox with alert pointed ears and bushy tail.",
+    "confidence": 0.91
+  },
+  "fox_03.jpg": {
+    "subject": "red fox",
+    "category": "animal",
+    "attributes": [
+      "orange fur",
+      "bushy tail",
+      "wildlife",
+      "forest",
+      "canid",
+      "carnivore"
+    ],
+    "caption": "A red fox hunting through fresh winter snow.",
+    "confidence": 0.92
+  },
+  "fox_04.jpg": {
+    "subject": "red fox",
+    "category": "animal",
+    "attributes": [
+      "orange fur",
+      "bushy tail",
+      "wildlife",
+      "forest",
+      "canid",
+      "carnivore"
+    ],
+    "caption": "Wild Vulpes vulpes foraging quietly among pine needles.",
+    "confidence": 0.93
+  },
+  "fox_05.jpg": {
+    "subject": "red fox",
+    "category": "animal",
+    "attributes": [
+      "orange fur",
+      "bushy tail",
+      "wildlife",
+      "forest",
+      "canid",
+      "carnivore"
+    ],
+    "caption": "A slender red fox resting under golden birch trees.",
+    "confidence": 0.94
+  },
+  "fox_06.jpg": {
+    "subject": "red fox",
+    "category": "animal",
+    "attributes": [
+      "orange fur",
+      "bushy tail",
+      "wildlife",
+      "forest",
+      "canid",
+      "carnivore"
+    ],
+    "caption": "Wild red fox kit playing in tall meadow grasses.",
+    "confidence": 0.95
+  },
+  "fox_07.jpg": {
+    "subject": "red fox",
+    "category": "animal",
+    "attributes": [
+      "orange fur",
+      "bushy tail",
+      "wildlife",
+      "forest",
+      "canid",
+      "carnivore"
+    ],
+    "caption": "A sharp portrait of a red fox with vibrant reddish-orange fur.",
+    "confidence": 0.96
+  },
+  "fox_08.jpg": {
+    "subject": "red fox",
+    "category": "animal",
+    "attributes": [
+      "orange fur",
+      "bushy tail",
+      "wildlife",
+      "forest",
+      "canid",
+      "carnivore"
+    ],
+    "caption": "A red fox stalking small prey across an open woodland.",
+    "confidence": 0.97
+  },
+  "fox_09.jpg": {
+    "subject": "red fox",
+    "category": "animal",
+    "attributes": [
+      "orange fur",
+      "bushy tail",
+      "wildlife",
+      "forest",
+      "canid",
+      "carnivore"
+    ],
+    "caption": "Adult red fox walking along a misty forest trail.",
+    "confidence": 0.9
+  },
+  "fox_10.jpg": {
+    "subject": "red fox",
+    "category": "animal",
+    "attributes": [
+      "orange fur",
+      "bushy tail",
+      "wildlife",
+      "forest",
+      "canid",
+      "carnivore"
+    ],
+    "caption": "A curious red fox looking directly toward the camera.",
+    "confidence": 0.91
+  },
+  "wolf_01.jpg": {
+    "subject": "gray wolf",
+    "category": "animal",
+    "attributes": [
+      "gray fur",
+      "pack predator",
+      "wilderness",
+      "carnivore",
+      "winter",
+      "howling"
+    ],
+    "caption": "A magnificent gray wolf standing atop a rocky winter cliff.",
+    "confidence": 0.9
+  },
+  "wolf_02.jpg": {
+    "subject": "gray wolf",
+    "category": "animal",
+    "attributes": [
+      "gray fur",
+      "pack predator",
+      "wilderness",
+      "carnivore",
+      "winter",
+      "howling"
+    ],
+    "caption": "A solitary timber wolf prowling through a cold northern forest.",
+    "confidence": 0.91
+  },
+  "wolf_03.jpg": {
+    "subject": "gray wolf",
+    "category": "animal",
+    "attributes": [
+      "gray fur",
+      "pack predator",
+      "wilderness",
+      "carnivore",
+      "winter",
+      "howling"
+    ],
+    "caption": "Pack of gray wolves resting together in snowy pine woods.",
+    "confidence": 0.92
+  },
+  "wolf_04.jpg": {
+    "subject": "gray wolf",
+    "category": "animal",
+    "attributes": [
+      "gray fur",
+      "pack predator",
+      "wilderness",
+      "carnivore",
+      "winter",
+      "howling"
+    ],
+    "caption": "Profile portrait of an adult gray wolf with piercing amber eyes.",
+    "confidence": 0.93
+  },
+  "wolf_05.jpg": {
+    "subject": "gray wolf",
+    "category": "animal",
+    "attributes": [
+      "gray fur",
+      "pack predator",
+      "wilderness",
+      "carnivore",
+      "winter",
+      "howling"
+    ],
+    "caption": "A majestic gray wolf trotting through misty tundra terrain.",
+    "confidence": 0.94
+  },
+  "wolf_06.jpg": {
+    "subject": "gray wolf",
+    "category": "animal",
+    "attributes": [
+      "gray fur",
+      "pack predator",
+      "wilderness",
+      "carnivore",
+      "winter",
+      "howling"
+    ],
+    "caption": "A wild wolf howling against a backdrop of spruce trees.",
+    "confidence": 0.95
+  },
+  "wolf_07.jpg": {
+    "subject": "gray wolf",
+    "category": "animal",
+    "attributes": [
+      "gray fur",
+      "pack predator",
+      "wilderness",
+      "carnivore",
+      "winter",
+      "howling"
+    ],
+    "caption": "Close-up of a gray wolf with thick silver-grey winter coat.",
+    "confidence": 0.96
+  },
+  "wolf_08.jpg": {
+    "subject": "gray wolf",
+    "category": "animal",
+    "attributes": [
+      "gray fur",
+      "pack predator",
+      "wilderness",
+      "carnivore",
+      "winter",
+      "howling"
+    ],
+    "caption": "A lone gray wolf surveying the northern wilderness.",
+    "confidence": 0.97
+  },
+  "wolf_09.jpg": {
+    "subject": "gray wolf",
+    "category": "animal",
+    "attributes": [
+      "gray fur",
+      "pack predator",
+      "wilderness",
+      "carnivore",
+      "winter",
+      "howling"
+    ],
+    "caption": "An alert gray wolf scanning the horizon at dusk.",
+    "confidence": 0.9
+  },
+  "wolf_10.jpg": {
+    "subject": "gray wolf",
+    "category": "animal",
+    "attributes": [
+      "gray fur",
+      "pack predator",
+      "wilderness",
+      "carnivore",
+      "winter",
+      "howling"
+    ],
+    "caption": "Adult wolf pausing by a frozen mountain stream.",
+    "confidence": 0.91
+  },
+  "dog_01.jpg": {
+    "subject": "domestic dog",
+    "category": "animal",
+    "attributes": [
+      "domesticated",
+      "pet",
+      "golden fur",
+      "friendly",
+      "canine",
+      "companion"
+    ],
+    "caption": "A friendly golden retriever dog sitting in a sunny suburban backyard.",
+    "confidence": 0.9
+  },
+  "dog_02.jpg": {
+    "subject": "domestic dog",
+    "category": "animal",
+    "attributes": [
+      "domesticated",
+      "pet",
+      "golden fur",
+      "friendly",
+      "canine",
+      "companion"
+    ],
+    "caption": "A domestic puppy playing happily with a toy on a green lawn.",
+    "confidence": 0.91
+  },
+  "dog_03.jpg": {
+    "subject": "domestic dog",
+    "category": "animal",
+    "attributes": [
+      "domesticated",
+      "pet",
+      "golden fur",
+      "friendly",
+      "canine",
+      "companion"
+    ],
+    "caption": "A loyal family dog resting indoors by a warm hearth.",
+    "confidence": 0.92
+  },
+  "dog_04.jpg": {
+    "subject": "domestic dog",
+    "category": "animal",
+    "attributes": [
+      "domesticated",
+      "pet",
+      "golden fur",
+      "friendly",
+      "canine",
+      "companion"
+    ],
+    "caption": "Close-up portrait of a happy domestic dog panting with a smile.",
+    "confidence": 0.93
+  },
+  "dog_05.jpg": {
+    "subject": "domestic dog",
+    "category": "animal",
+    "attributes": [
+      "domesticated",
+      "pet",
+      "golden fur",
+      "friendly",
+      "canine",
+      "companion"
+    ],
+    "caption": "A golden retriever fetching a ball in an urban dog park.",
+    "confidence": 0.94
+  },
+  "dog_06.jpg": {
+    "subject": "domestic dog",
+    "category": "animal",
+    "attributes": [
+      "domesticated",
+      "pet",
+      "golden fur",
+      "friendly",
+      "canine",
+      "companion"
+    ],
+    "caption": "A well-groomed domestic dog walking politely on a leash.",
+    "confidence": 0.95
+  },
+  "dog_07.jpg": {
+    "subject": "domestic dog",
+    "category": "animal",
+    "attributes": [
+      "domesticated",
+      "pet",
+      "golden fur",
+      "friendly",
+      "canine",
+      "companion"
+    ],
+    "caption": "A playful dog splashing through shallow lake waters.",
+    "confidence": 0.96
+  },
+  "dog_08.jpg": {
+    "subject": "domestic dog",
+    "category": "animal",
+    "attributes": [
+      "domesticated",
+      "pet",
+      "golden fur",
+      "friendly",
+      "canine",
+      "companion"
+    ],
+    "caption": "A sleeping domestic dog curled up comfortably on a rug.",
+    "confidence": 0.97
+  },
+  "dog_09.jpg": {
+    "subject": "domestic dog",
+    "category": "animal",
+    "attributes": [
+      "domesticated",
+      "pet",
+      "golden fur",
+      "friendly",
+      "canine",
+      "companion"
+    ],
+    "caption": "A gentle pet dog sitting attentively beside its companion.",
+    "confidence": 0.9
+  },
+  "dog_10.jpg": {
+    "subject": "domestic dog",
+    "category": "animal",
+    "attributes": [
+      "domesticated",
+      "pet",
+      "golden fur",
+      "friendly",
+      "canine",
+      "companion"
+    ],
+    "caption": "A cheerful golden puppy exploring backyard garden flowers.",
+    "confidence": 0.91
+  },
+  "bear_01.jpg": {
+    "subject": "brown bear",
+    "category": "animal",
+    "attributes": [
+      "large mammal",
+      "brown fur",
+      "grizzly",
+      "river",
+      "salmon",
+      "wildlife"
+    ],
+    "caption": "A massive brown grizzly bear catching wild salmon in a river.",
+    "confidence": 0.9
+  },
+  "bear_02.jpg": {
+    "subject": "brown bear",
+    "category": "animal",
+    "attributes": [
+      "large mammal",
+      "brown fur",
+      "grizzly",
+      "river",
+      "salmon",
+      "wildlife"
+    ],
+    "caption": "A brown bear mother guiding two playful cubs across a meadow.",
+    "confidence": 0.91
+  },
+  "bear_03.jpg": {
+    "subject": "brown bear",
+    "category": "animal",
+    "attributes": [
+      "large mammal",
+      "brown fur",
+      "grizzly",
+      "river",
+      "salmon",
+      "wildlife"
+    ],
+    "caption": "A large brown bear foraging for wild berries in coastal valleys.",
+    "confidence": 0.92
+  },
+  "bear_04.jpg": {
+    "subject": "brown bear",
+    "category": "animal",
+    "attributes": [
+      "large mammal",
+      "brown fur",
+      "grizzly",
+      "river",
+      "salmon",
+      "wildlife"
+    ],
+    "caption": "Close-up of a grizzly bear with thick brown fur standing in shallow water.",
+    "confidence": 0.93
+  },
+  "bear_05.jpg": {
+    "subject": "brown bear",
+    "category": "animal",
+    "attributes": [
+      "large mammal",
+      "brown fur",
+      "grizzly",
+      "river",
+      "salmon",
+      "wildlife"
+    ],
+    "caption": "A brown bear scratching its back against a tall cedar tree.",
+    "confidence": 0.94
+  },
+  "bear_06.jpg": {
+    "subject": "brown bear",
+    "category": "animal",
+    "attributes": [
+      "large mammal",
+      "brown fur",
+      "grizzly",
+      "river",
+      "salmon",
+      "wildlife"
+    ],
+    "caption": "A solitary brown bear traversing an alpine hillside.",
+    "confidence": 0.95
+  },
+  "bear_07.jpg": {
+    "subject": "brown bear",
+    "category": "animal",
+    "attributes": [
+      "large mammal",
+      "brown fur",
+      "grizzly",
+      "river",
+      "salmon",
+      "wildlife"
+    ],
+    "caption": "A grizzly bear resting peacefully in tall grass near a river.",
+    "confidence": 0.96
+  },
+  "bear_08.jpg": {
+    "subject": "brown bear",
+    "category": "animal",
+    "attributes": [
+      "large mammal",
+      "brown fur",
+      "grizzly",
+      "river",
+      "salmon",
+      "wildlife"
+    ],
+    "caption": "An adult brown bear scanning the rapids for migrating fish.",
+    "confidence": 0.97
+  },
+  "deer_01.jpg": {
+    "subject": "white-tailed deer",
+    "category": "animal",
+    "attributes": [
+      "antlers",
+      "herbivore",
+      "white-tailed",
+      "meadow",
+      "forest",
+      "graceful"
+    ],
+    "caption": "A majestic white-tailed deer buck with large antlers in morning mist.",
+    "confidence": 0.9
+  },
+  "deer_02.jpg": {
+    "subject": "white-tailed deer",
+    "category": "animal",
+    "attributes": [
+      "antlers",
+      "herbivore",
+      "white-tailed",
+      "meadow",
+      "forest",
+      "graceful"
+    ],
+    "caption": "A graceful white-tailed deer doe grazing peacefully in a meadow.",
+    "confidence": 0.91
+  },
+  "deer_03.jpg": {
+    "subject": "white-tailed deer",
+    "category": "animal",
+    "attributes": [
+      "antlers",
+      "herbivore",
+      "white-tailed",
+      "meadow",
+      "forest",
+      "graceful"
+    ],
+    "caption": "A pair of wild deer standing alert at the forest edge.",
+    "confidence": 0.92
+  },
+  "deer_04.jpg": {
+    "subject": "white-tailed deer",
+    "category": "animal",
+    "attributes": [
+      "antlers",
+      "herbivore",
+      "white-tailed",
+      "meadow",
+      "forest",
+      "graceful"
+    ],
+    "caption": "A spotted deer fawn resting quietly in sheltered tall ferns.",
+    "confidence": 0.93
+  },
+  "deer_05.jpg": {
+    "subject": "white-tailed deer",
+    "category": "animal",
+    "attributes": [
+      "antlers",
+      "herbivore",
+      "white-tailed",
+      "meadow",
+      "forest",
+      "graceful"
+    ],
+    "caption": "A white-tailed stag leaping gracefully over a woodland creek.",
+    "confidence": 0.94
+  },
+  "deer_06.jpg": {
+    "subject": "white-tailed deer",
+    "category": "animal",
+    "attributes": [
+      "antlers",
+      "herbivore",
+      "white-tailed",
+      "meadow",
+      "forest",
+      "graceful"
+    ],
+    "caption": "Close-up portrait of a wild deer with velvet-covered antlers.",
+    "confidence": 0.95
+  },
+  "deer_07.jpg": {
+    "subject": "white-tailed deer",
+    "category": "animal",
+    "attributes": [
+      "antlers",
+      "herbivore",
+      "white-tailed",
+      "meadow",
+      "forest",
+      "graceful"
+    ],
+    "caption": "A female deer foraging for tender leaves in late autumn woods.",
+    "confidence": 0.96
+  },
+  "deer_08.jpg": {
+    "subject": "white-tailed deer",
+    "category": "animal",
+    "attributes": [
+      "antlers",
+      "herbivore",
+      "white-tailed",
+      "meadow",
+      "forest",
+      "graceful"
+    ],
+    "caption": "A group of white-tailed deer grazing in a golden sunrise meadow.",
+    "confidence": 0.97
+  },
+  "blurry_mystery_01.jpg": {
+    "subject": "unknown",
+    "category": "unidentified",
+    "attributes": [
+      "blurry",
+      "low contrast",
+      "unclear"
+    ],
+    "caption": "A blurry, low-contrast image where the subject cannot be determined.",
+    "confidence": 0.42
+  },
+  "abstract_noise_02.jpg": {
+    "subject": "abstract pattern",
+    "category": "distortion",
+    "attributes": [
+      "noise",
+      "grain",
+      "indistinct"
+    ],
+    "caption": "An abstract, grainy image with severe visual distortion.",
+    "confidence": 0.38
+  }
+}

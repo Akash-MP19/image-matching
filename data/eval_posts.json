@@ -1,0 +1,101 @@
+{
+  "description": "Labeled evaluation dataset for measuring Top-1 Retrieval Precision and Mismatch Guard rejection safety.",
+  "posts": [
+    {
+      "id": "eval_01",
+      "title": "Autumn Forest Clearing Behaviors of Red Foxes",
+      "content": "Observing wild red foxes as they hunt and stand alert in autumn forest clearings among fallen leaves.",
+      "expected_category": "fox",
+      "ground_truth_filename": "fox_01.jpg",
+      "is_negative_example": false
+    },
+    {
+      "id": "eval_02",
+      "title": "Winter Snowdrifts and Vulpes Vulpes Hunting",
+      "content": "How wild red fox species and Vulpes vulpes hunt small rodents burrowed through fresh winter snow.",
+      "expected_category": "fox",
+      "ground_truth_filename": "fox_03.jpg",
+      "is_negative_example": false
+    },
+    {
+      "id": "eval_03",
+      "title": "Rocky Winter Cliffs: Solitary Timber Wolf",
+      "content": "Photographic study of a magnificent solitary timber wolf perched atop a rocky winter cliff in northern ranges.",
+      "expected_category": "wolf",
+      "ground_truth_filename": "wolf_01.jpg",
+      "is_negative_example": false
+    },
+    {
+      "id": "eval_04",
+      "title": "Pack of Gray Wolves in Snowy Pine Woods",
+      "content": "Social dynamics and resting habits of a pack of gray wolves deep within snowy pine woods.",
+      "expected_category": "wolf",
+      "ground_truth_filename": "wolf_03.jpg",
+      "is_negative_example": false
+    },
+    {
+      "id": "eval_05",
+      "title": "Suburban Golden Retriever Backyard Care",
+      "content": "Daily enrichment and care tips for a friendly golden retriever dog resting happily in a sunny suburban backyard.",
+      "expected_category": "dog",
+      "ground_truth_filename": "dog_01.jpg",
+      "is_negative_example": false
+    },
+    {
+      "id": "eval_06",
+      "title": "Playful Dogs Splashing Through Lake Waters",
+      "content": "Summer water safety and exercise tips for a playful domestic dog splashing through shallow lake waters.",
+      "expected_category": "dog",
+      "ground_truth_filename": "dog_07.jpg",
+      "is_negative_example": false
+    },
+    {
+      "id": "eval_07",
+      "title": "Massive Brown Grizzly Bears Catching River Salmon",
+      "content": "The spectacular wildlife spectacle of massive brown grizzly bears catching wild migrating salmon in a rushing river.",
+      "expected_category": "bear",
+      "ground_truth_filename": "bear_01.jpg",
+      "is_negative_example": false
+    },
+    {
+      "id": "eval_08",
+      "title": "Coastal Brown Bear Mothers and Playful Cubs",
+      "content": "Ecology of a brown bear mother attentively guiding two playful cubs foraging across an alpine meadow.",
+      "expected_category": "bear",
+      "ground_truth_filename": "bear_02.jpg",
+      "is_negative_example": false
+    },
+    {
+      "id": "eval_09",
+      "title": "White-Tailed Stag Buck with Large Antlers in Morning Mist",
+      "content": "Early sunrise observations of a majestic white-tailed deer buck displaying large antlers in morning mist.",
+      "expected_category": "deer",
+      "ground_truth_filename": "deer_01.jpg",
+      "is_negative_example": false
+    },
+    {
+      "id": "eval_10",
+      "title": "Graceful White-Tailed Deer Doe Grazing in Meadow",
+      "content": "Peaceful woodland scenes of a graceful white-tailed deer doe foraging for tender grasses in a peaceful meadow.",
+      "expected_category": "deer",
+      "ground_truth_filename": "deer_02.jpg",
+      "is_negative_example": false
+    },
+    {
+      "id": "eval_11",
+      "title": "Quantum Processor Architectures and Superconducting Circuits",
+      "content": "Cryogenic microwave control electronics, qubit coherence times, and quantum error correction codes in semiconductor laboratories.",
+      "expected_category": null,
+      "ground_truth_filename": null,
+      "is_negative_example": true
+    },
+    {
+      "id": "eval_12",
+      "title": "Deep Ocean Mariana Trench Hydrothermal Exploration",
+      "content": "Robotic submersibles equipped with titanium hulls exploring abyssal ocean floor trenches and geothermal vents.",
+      "expected_category": null,
+      "ground_truth_filename": null,
+      "is_negative_example": true
+    }
+  ]
+}
