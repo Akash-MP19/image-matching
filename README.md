@@ -1,201 +1,114 @@
 # AI Image Understanding & Content Matching Engine
 
-An AI-powered content decision system that ingests an image library, extracts schema-validated structured vision metadata using Gemini 2.0 Flash (`gemini-2.0-flash`), generates dense vector embeddings (`text-embedding-004`), ranks candidates for written articles using semantic similarity, and applies an intelligent **Mismatch Guard** safety layer to provably reject incorrect pairings with human-readable explanations.
+An AI-powered system that understands images and matches the right image to an article while preventing incorrect matches—such as using a wolf image for a fox article.
 
 ---
 
-## 1. System Overview
+## Features
 
-Standard semantic search engines blindly surface the highest cosine similarity vector, frequently resulting in subtle but damaging domain errors (e.g. recommending a gray wolf photo for an article about red foxes because both are wild canines in snowy forests).
-
-This engine treats AI as an unreliable-but-useful component: **good suggestions when confident, safe rejection when uncertain**.
-
-### Key Capabilities
-- **Structured Vision Understanding**: Validates visual output from Gemini 2.0 Flash (`gemini-2.0-flash`) against strict schemas (`subject`, `category`, `attributes`, `caption`, `confidence`).
-- **Low-Confidence Flagging**: Automatically flags degraded, blurry, or ambiguous images for human review rather than silently guessing.
-- **Asynchronous Batch Processing**: Background queue with exponential backoff retries and per-call AI cost tracking.
-- **Taxonomic & Semantic Vector Search**: Embeds captions and articles into a shared 256-dimensional vector space (`text-embedding-004` compatible); recognizes synonyms and biological equivalents (`"red fox"` $\leftrightarrow$ `"Vulpes vulpes"`).
-- **The Mismatch Guard**: Multi-stage safety layer evaluating confidence scores, similarity thresholds, and taxonomic consistency to reject incorrect candidates (e.g., wolf for fox) with explanatory feedback.
-- **Human-in-the-Loop Review**: REST API and internal admin dashboard for inspecting, approving, or rejecting pairings.
+- **Structured Vision Metadata**: Extracts validated JSON metadata (`subject`, `category`, `attributes`, `caption`, `confidence`).
+- **Low-Confidence Detection**: Automatically flags blurry, corrupted, or ambiguous images for human review.
+- **Semantic Matching**: Embeds post text and image captions into a shared vector space for conceptual retrieval.
+- **The Mismatch Guard**: Prevents false matches by checking taxonomic consistency and similarity thresholds.
+- **"No Confident Match" Fallback**: Gracefully rejects out-of-domain posts with itemized reasons instead of guessing.
+- **Background Batch Processing**: Asynchronous ingestion worker with exponential backoff retries.
+- **Human-in-the-Loop Review**: REST API and minimal admin dashboard to inspect, approve, or reject pairings.
+- **AI Cost Tracking**: Records token usage, operation costs, and enforces a hard budget guard.
+- **Reproducible Modes**: Supports live Gemini 2.0 Flash (`gemini-2.0-flash`) and deterministic offline mode.
 
 ---
 
-## 2. Architecture Diagram
+## Tech Stack
+
+- **Language & Framework**: Python, FastAPI, Uvicorn
+- **Database & ORM**: PostgreSQL, SQLAlchemy, Alembic
+- **AI & ML**: Gemini 2.0 Flash, Semantic Text Embeddings, NumPy, Scikit-learn
+- **Validation**: Pydantic V2
+- **Testing & Containerization**: Pytest, Pytest-AsyncIO, Docker, Docker Compose
+
+---
+
+## How It Works
 
 ```
-                                  +-----------------------+
-                                  |  Image Corpus (48)    |
-                                  +-----------+-----------+
-                                              |
-                                              v
-                              +-------------------------------+
-                              | Async Batch Processing Worker |
-                              | - Retries (Exponential Backoff)|
-                              | - Per-Call Cost Tracking      |
-                              +---------------+---------------+
-                                              |
-                     +------------------------+------------------------+
-                     |                                                 |
-                     v                                                 v
-        +-------------------------+                       +-------------------------+
-        |  Vision Service         |                       | Embedding Engine        |
-        |  - Gemini 2.0 Flash     |                       | - text-embedding-004    |
-        |  - Pydantic Validation  |                       | - 256-Dim Semantic Space|
-        |  - Low-Confidence Flag  |                       | - Concept Clustering    |
-        |  - Offline Cache Mode   |                       | - Cosine Similarity     |
-        +------------+------------+                       +------------+------------+
-                     |                                                 |
-                     +------------------------+------------------------+
-                                              |
-                                              v
-                                  +-----------------------+
-                                  |  PostgreSQL Database  |
-                                  |  - images & metadata  |
-                                  |  - vectors & posts    |
-                                  |  - suggestions & costs|
-                                  +-----------+-----------+
-                                              ^
-                                              |
-[ Blog Article / Post ] ----> [ Embed Content ]
-                                              |
-                                              v
-                                 +-------------------------+
-                                 | Top-K Candidate Ranking |
-                                 +------------+------------+
-                                              |
-                                              v
-                                 +-------------------------+
-                                 |   THE MISMATCH GUARD    |
-                                 | - Low-Confidence Check  |
-                                 | - Taxonomic Conflict    |
-                                 | - Category Alignment    |
-                                 | - Similarity Threshold  |
-                                 +------------+------------+
-                                              |
-                         +--------------------+--------------------+
-                         |                                         |
-                         v                                         v
-              [ Status: MATCH_FOUND ]                  [ Status: NO_CONFIDENT_MATCH ]
-              Suggested Candidate +                    Detailed List of Itemized
-              Approval Explanation                     Rejection Reasons
-                         |                                         |
-                         +--------------------+--------------------+
-                                              |
-                                              v
-                                  +-----------------------+
-                                  | Review & Audit API    |
-                                  | - Approve / Reject    |
-                                  | - Cost Ledger Audit   |
-                                  | - Admin Dashboard     |
-                                  +-----------------------+
+Image → Vision AI → Metadata → Embeddings → Similarity Ranking → Mismatch Guard → Match / No Confident Match
 ```
 
----
-
-## 3. The Mismatch Guard (Safety Layer)
-
-The Mismatch Guard evaluates retrieved image candidates before presenting them to users.
-
-### Decision Rules (Evaluated in Precedence Order):
-1. **Quality & Confidence Gate**: If an image was flagged during ingestion as low-confidence (`confidence < 0.70`) or degraded quality, it is categorically refused.
-2. **Taxonomic Category Conflict Guard**: Validates that the entity discussed in the post matches the subject depicted in the image. If an article discusses a **fox**, but the candidate image depicts a **wolf**, the candidate is immediately rejected:
-   > *"Animal category mismatch: expected fox, detected wolf"*
-3. **Explicit Category Alignment**: Verifies that high-level domain constraints match.
-4. **Similarity Threshold Gate**: Ensures the cosine similarity score clears the calibrated confidence threshold ($\ge 0.55$).
-5. **No Confident Match Fallback**: When no candidate clears all rules, the system returns status `"NO_CONFIDENT_MATCH"` with itemized rejection explanations instead of guessing.
+1. **Ingest**: Images in the 48-image library are analyzed by the vision model.
+2. **Validate**: Metadata is schema-validated; low-confidence images (< 0.70) are flagged.
+3. **Embed**: Image captions and article texts are mapped into dense semantic vectors.
+4. **Rank**: Candidates are ranked by cosine similarity.
+5. **Guard**: The Mismatch Guard verifies taxonomic consistency (e.g., rejecting a wolf candidate for a fox post) and confidence thresholds.
+6. **Decide**: Returns `MATCH_FOUND` with the approved image or `NO_CONFIDENT_MATCH` with explanations.
 
 ---
 
-## 4. Evaluation Benchmark Results
+## Run Locally
 
-The engine includes an automated benchmark evaluating 12 labeled article scenarios:
-
-- **Benchmark Command**: `python eval/evaluate.py`
-- **Total Posts Evaluated**: 12
-- **Positive Retrieval Cases**: 10 posts with ground truth targets $\rightarrow$ **10 / 10 (100.0% Top-1 Precision)**
-- **Out-of-Domain Negative Controls**: 2 unrelated posts $\rightarrow$ **2 / 2 (100.0% Safe Rejections)**
-- **Combined Benchmark Accuracy**: **12 / 12 (100.0%)**
-
----
-
-## 5. Quick Start & Setup
-
-### Prerequisites
-- Python 3.10+
-- Docker & Docker Compose (optional for containerized PostgreSQL)
-
-### 1. Installation
+### 1. Clone and Install
 ```bash
 git clone https://github.com/Akash-MP19/image-matching.git
 cd image-matching
 python -m pip install -r requirements.txt
 ```
 
-### 2. Environment Configuration
-Copy `.env.example` to `.env`:
+### 2. Configure Environment
 ```bash
 cp .env.example .env
 ```
-*(By default, `OFFLINE_MODE=true` is enabled for deterministic, instant execution without API keys. To connect live Gemini Flash, set `OFFLINE_MODE=false` and provide your `GEMINI_API_KEY`.)*
+*(By default, `OFFLINE_MODE=true` is enabled for instant execution without API keys. To use live Gemini, set `GEMINI_API_KEY` in `.env`.)*
 
-### 3. Database Seeding & Corpus Ingestion
-Run the seed script to initialize tables, ingest the 48-image corpus, generate embeddings, and create sample posts:
+### 3. Seed Database & Ingest Corpus
+Initializes database tables, ingests the 48 images, generates embeddings, and seeds demo posts:
 ```bash
 python scripts/seed_data.py
 ```
 
-### 4. Running the Service
-Start the FastAPI server:
+### 4. Start Server
 ```bash
-uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
+uvicorn src.main:app --host 0.0.0.0 --port 8000
 ```
-- Interactive API Documentation: [http://localhost:8000/docs](http://localhost:8000/docs)
-- Health Check: [http://localhost:8000/health](http://localhost:8000/health)
-- Minimal Inspection Dashboard: [http://localhost:8000/admin](http://localhost:8000/admin)
+
+- **Interactive API Docs**: [http://localhost:8000/docs](http://localhost:8000/docs)
+- **Admin Review Dashboard**: [http://localhost:8000/admin](http://localhost:8000/admin)
+- **Service Configuration**: Entry points defined in [`manifest.yaml`](./manifest.yaml) / [`capstone.yaml`](./capstone.yaml).
 
 ---
 
-## 6. Verification & Acceptance Probes
+## Testing & Verification
 
-To run the automated test suite (22 unit & integration tests):
+Run the test suite and verification scripts:
 ```bash
+# Run 22 unit & integration tests
 python -m pytest -v
-```
 
-To execute the 6 behavioral acceptance probes:
-```bash
+# Run 6 behavioral acceptance probes
 python scripts/run_probes.py
-```
 
-To execute the labeled benchmark:
-```bash
+# Run labeled evaluation benchmark
 python eval/evaluate.py
 ```
 
-All requirement verifications are detailed in [`CHECKLIST.md`](./CHECKLIST.md) and [`EVIDENCE.md`](./EVIDENCE.md), and service entry points are defined in [`capstone.yaml`](./capstone.yaml) / [`manifest.yaml`](./manifest.yaml).
+### Verification Results
+- **Pytest Suite**: 22/22 tests passing (100%)
+- **Acceptance Probes**: 6/6 probes passing (100%)
+- **Positive Retrieval Cases**: 10/10 matched ground truth (100.0% Top-1 Precision)
+- **Safe Rejection Cases**: 2/2 out-of-domain posts correctly rejected with explanation
+- **Overall Benchmark Accuracy**: 12/12 cases passed (100.0%)
 
-### Acceptance Probes Summary:
-- **Probe 1**: Ingests image corpus $\rightarrow$ 48 images processed, 2 low-confidence images cleanly flagged.
-- **Probe 2**: Queries "red fox" post $\rightarrow$ fox image ranks first (0.5682); wolf and dog rank significantly lower.
-- **Probe 3**: Forces wolf as candidate for fox post $\rightarrow$ rejected with `"Animal category mismatch: expected fox, detected wolf"`.
-- **Probe 4**: Queries out-of-domain post $\rightarrow$ returns `"NO_CONFIDENT_MATCH"` with itemized reasons.
-- **Probe 5**: Executes benchmark suite $\rightarrow$ measures Top-1 precision at 100.0%.
-- **Probe 6**: Audits cost log $\rightarrow$ all calls attributed with costs, tokens, and timestamps.
-
----
-
-## 7. Running with Docker Compose (PostgreSQL)
-
-To run the complete production environment with PostgreSQL 16:
-```bash
-docker compose up -d --build
-docker compose exec app python scripts/seed_data.py
-```
+Detailed proofs are recorded in [`EVIDENCE.md`](./EVIDENCE.md) and [`CHECKLIST.md`](./CHECKLIST.md).
 
 ---
 
-## 8. Limitations & Future Work
+## Limitations
 
-1. **Static Taxonomy Dictionary**: The offline taxonomic conflict detector utilizes a curated taxonomy tree for canids, ursids, and cervids. Future iterations could use a dynamic Knowledge Graph or zero-shot NLI entailment classifier.
-2. **Multi-Modal Joint Embeddings**: Captions are currently projected via text vectors. Integrating joint vision-language encoders (e.g., CLIP/SigLIP) would enable direct image-to-text embedding comparisons.
-3. **Corpus Scale**: The current test library contains 48 images across 5 animal categories. At scales $> 100,000$ images, an approximate nearest neighbor (ANN) index (HNSW via pgvector or Milvus) is recommended.
+- **Dataset Scale**: Current dataset contains 48 images across 5 animal categories (`fox`, `wolf`, `dog`, `bear`, `deer`) plus edge cases.
+- **Offline Taxonomy**: Deterministic offline mode uses a curated taxonomy cluster dictionary for animal species.
+- **Vector Indexing**: Uses exact in-memory/DB cosine similarity suitable for small-to-medium corpora; larger production datasets (>100k) would benefit from ANN indexes (e.g. pgvector HNSW).
+
+---
+
+## Author
+
+**Akash MP**  
+GitHub: [https://github.com/Akash-MP19](https://github.com/Akash-MP19)
