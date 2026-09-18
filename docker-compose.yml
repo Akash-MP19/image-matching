@@ -1,0 +1,42 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: image_matching_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+      POSTGRES_DB: image_matching
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d image_matching"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  app:
+    build: .
+    container_name: image_matching_app
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "8000:8000"
+    environment:
+      ENVIRONMENT: production
+      DATABASE_URL: postgresql+asyncpg://postgres:postgrespassword@db:5432/image_matching
+      SQLITE_FALLBACK: "false"
+      OFFLINE_MODE: "true"
+      GEMINI_API_KEY: ""
+      SIMILARITY_THRESHOLD: "0.55"
+      CONFIDENCE_THRESHOLD: "0.70"
+      BUDGET_LIMIT_USD: "5.00"
+    volumes:
+      - ./data:/app/data
+
+volumes:
+  postgres_data:
